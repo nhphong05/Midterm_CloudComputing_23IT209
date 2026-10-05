@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Management - {{mssv}}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        .header { background: #e3f2fd; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        .btn { display: inline-block; padding: 8px 16px; background: #2196F3; color: white; text-decoration: none; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>Họ tên: {{name}} - MSSV: {{mssv}}</h2>
+        <p>Tỷ lệ VAT áp dụng: <strong>{{vatRate}}%</strong></p>
+        <p>Lượt truy cập Session (Cloud MongoDB): <strong>{{sessionViews}}</strong></p>
+    </div>
+
+    <a href="/books/add" class="btn">Thêm sách mới</a>
+
+    <h3>Danh Sách Sách</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Mã Sách</th>
+                <th>Tên Sách</th>
+                <th>Tác Giả</th>
+                <th>Giá Gốc ($)</th>
+                <th>VAT (%)</th>
+                <th>Giá Sau VAT ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each books}}
+            <tr>
+                <td>{{this.code}}</td>
+                <td>{{this.title}}</td>
+                <td>{{this.author}}</td>
+                <td>{{this.price}}</td>
+                <td>{{this.vat}}%</td>
+                <td><strong>{{this.finalPrice}}</strong></td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="6" style="text-align: center;">Chưa có dữ liệu sách.</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</body>
+</html>

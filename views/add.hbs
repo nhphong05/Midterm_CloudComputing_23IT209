@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Sách Mới - {{mssv}}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="number"] { width: 300px; padding: 8px; box-sizing: border-box; }
+        .btn { padding: 8px 16px; background: #4CAF50; color: white; border: none; cursor: pointer; border-radius: 4px; }
+        .btn-back { background: #757575; text-decoration: none; display: inline-block; text-align: center; }
+    </style>
+</head>
+<body>
+    <h2>Thêm Sách Mới</h2>
+    <p>Người thực hiện: <strong>{{name}} ({{mssv}})</strong> - Mức VAT tự động: <strong>{{vatRate}}%</strong></p>
+
+    <form action="/books" method="POST">
+        <div class="form-group">
+            <label>Mã sách (Bắt đầu bằng 209):</label>
+            <input type="text" name="code" placeholder="VD: 209001" required />
+        </div>
+        <div class="form-group">
+            <label>Tên sách:</label>
+            <input type="text" name="title" required />
+        </div>
+        <div class="form-group">
+            <label>Tác giả:</label>
+            <input type="text" name="author" required />
+        </div>
+        <div class="form-group">
+            <label>Giá chưa VAT ($):</label>
+            <input type="number" step="0.01" name="price" required />
+        </div>
+        <button type="submit" class="btn">Lưu Sách</button>
+        <a href="/books" class="btn btn-back">Quay lại</a>
+    </form>
+</body>
+</html>
