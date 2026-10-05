@@ -22,6 +22,8 @@ app.use(express.static(path.join(__dirname, "public")));
 // ========================================
 const mongoStoreOptions = {
     mongoUrl: process.env.MONGODB_WRITE_URI,
+    dbName: process.env.MONGODB_DB_NAME || "DB_23IT209",
+    mongoOptions: { authSource: "admin" },
     collectionName: "sessions",
     ttl: 14 * 24 * 60 * 60
 };
@@ -31,11 +33,7 @@ app.use(
         secret: process.env.SESSION_SECRET || "super_secret_key_23IT209",
         resave: false,
         saveUninitialized: false,
-        store: (MongoStore.create || MongoStore.default.create)({
-            mongoUrl: process.env.MONGODB_WRITE_URI,
-            collectionName: "sessions",
-            ttl: 14 * 24 * 60 * 60
-        }),
+        store: (MongoStore.create || MongoStore.default.create)(mongoStoreOptions),
         cookie: { maxAge: 1000 * 60 * 60 * 24 }
     })
 );
